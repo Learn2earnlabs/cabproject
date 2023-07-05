@@ -1,0 +1,350 @@
+Day - 4
+-----------
+
+Instance variable (contd...)
+-------------------------------
+
+Prg#1
+-----
+class Hello
+{
+	int age=30;
+	String name="nitin";
+}
+
+class Test
+{
+	public static void main(String args[])
+	{
+		Hello h = new Hello();
+		System.out.println("The age is "+h.age);
+		System.out.println("The name is "+h.name);
+	}
+}
+
+
+
+
+Prg#2
+-------
+class Hello
+{
+	int age=300;		// instance variable of class Hello
+	String name="nitin";	// instance variable of class Hello		
+}
+
+class Test
+{
+	void getData()		// instance method of class Test
+	{
+		Hello h = new Hello();
+		System.out.println("The age is "+h.age);
+		System.out.println("The name is "+h.name);
+	}
+	public static void main(String args[])
+	{
+		new Test().getData();
+	}
+}
+
+--------------------------------------------------------------------------------------------
+when we don't initialize the instance variable.
+
+
+
+Prg#3
+------
+class Test
+{
+	int id;
+	void getData()		// instance method of class Test
+	{
+		System.out.println("The id is "+id);
+	}
+	public static void main(String args[])
+	{
+		new Test().getData();
+	}
+}
+
+// In that case default value get initialized to instance variable at the time of object creation.
+
+-----------------------------------------------------------------------------------------
+
+
+what if local variable and instance variable are of same name?
+
+
+Prg#4
+-----
+class Test
+{
+	int id=23;
+	void getData()		// instance method of class Test
+	{
+		int id=30;	// local variable of getData method
+		System.out.println("The id is "+id);
+	}
+	public static void main(String args[])
+	{
+		new Test().getData();
+	}
+}
+
+// local variable's value get displayed, because the priority of local variable is always high.
+
+
+so if we want to access the instance variable inside the method, then
+then we use 'this' keyword.
+
+
+this keyword:
+------------
+	- relates with the current object.
+	- always of type instance, means we can't use this keyword inside static content.
+
+
+
+Prg#4
+-------
+class Test
+{
+	int id=23;
+	void getData()		// instance method of class Test
+	{
+		int id=30;	// local variable of getData method
+		System.out.println("The value of local variable is "+id);
+		System.out.println("The value of instance variable is "+this.id);
+	}
+	public static void main(String args[])
+	{
+		new Test().getData();
+	}
+}
+
+
+
+
+
+Prg#5
+--------
+class Test
+{
+	int id=23;
+	void getData()		// instance method of class Test
+	{
+		int id=30;	// local variable of getData method
+		System.out.println("The value of local variable is "+id);
+		System.out.println("The value of instance variable is "+this.id);
+	}
+	public static void main(String args[])
+	{
+		new Test().getData();
+	}
+}
+
+
+
+
+Prg#6
+-------
+class Test
+{
+	int id=23;
+	static void getData()		// static method of class Test
+	{
+		int id=30;	// local variable of getData method
+		System.out.println("The value of local variable is "+id);
+		System.out.println("The value of instance variable is "+this.id);
+	}
+	public static void main(String args[])
+	{
+		new Test().getData();
+	}
+}
+
+// compile time error
+// non-static variable this cannot be referenced from a static context
+
+
+
+--------------------------------------------------------------------------------------------------
+
+static variable:
+------------------
+	- defined inside a class using static keyword.
+	- access by using classname (in any case).
+		- can be accessed directly (within a class) or access by using object but it comes under
+		worst programming practice.
+
+	- if we don't initialise the value of static variable then default value get initialized during
+	class loading.
+
+	- stored in class memory.
+	- relates with class.
+
+	- memory allocated to static variable when class gets loaded.
+	- memory deallocated to static variable when class gets unloaded.
+
+
+
+Prg#7
+-------
+class Test
+{
+	static String category="student";	//static variable of class Test
+
+	void getData()		// instance method of class Test
+	{
+		System.out.println("The value of static variable is "+Test.category);
+	}
+	public static void main(String args[])
+	{
+		new Test().getData();
+	}
+}
+
+
+
+----------------------------------------------------------------------------------------------
+
+difference between static and instance variable
+------------------------------------------------
+first difference:
+-------------------
+- instance variable are used when we deals with distinct values of objects.
+	like for class student, every student object has their distinct names.
+- static variables are used when we deals with common value for all the objects.
+	like for class student, the class name is same for all the student objects.
+
+
+
+Prg#8
+--------
+class Student
+{
+String name;	// instance variable	
+static String collegeName="xyz institute";	//static variable
+
+void setName(String st_Name)	// st_Name is the local variable of setName method
+{
+	name=st_Name;
+}
+void getDetails()
+{
+	System.out.println("The name of student is : "+name);
+	System.out.println("The college name is : "+Student.collegeName);
+}
+public static void main(String args[])
+{
+	Student st1=new Student();
+	Student st2=new Student();
+	
+	st1.setName("nitin");
+	st2.setName("shahzaib");
+
+	st1.getDetails();
+	st2.getDetails();
+
+}
+}
+
+
+
+
+Prg#9
+------
+class Student
+{
+String name;	// instance variable	
+static String collegeName="xyz institute";	//static variable
+
+void setName(String name)	// st_Name is the local variable of setName method
+{
+	this.name=name;
+}
+void getDetails()
+{
+	System.out.println("The name of student is : "+name);
+	System.out.println("The college name is : "+Student.collegeName);
+}
+public static void main(String args[])
+{
+	Student st1=new Student();
+	Student st2=new Student();
+	
+	st1.setName("nitin lawania");
+	st2.setName("shahzaib");
+
+	st1.getDetails();
+	st2.getDetails();
+
+}
+}
+
+
+
+
+second difference:
+-----------------------
+
+
+// if we change the value of instance variable for an object then its value would only get changed
+for that particular object,
+but if we change the value of static variable for an object, then its value would get changed for
+all the objects of that class.
+
+
+Prg#10
+--------
+class Student
+{
+String name;	// instance variable	
+static String collegeName="xyz institute";	//static variable
+
+void setName(String name)	// st_Name is the local variable of setName method
+{
+	this.name=name;
+}
+void getDetails()
+{
+	System.out.println("The name of student is : "+name);
+	System.out.println("The college name is : "+Student.collegeName);
+}
+public static void main(String args[])
+{
+	Student st1=new Student();
+	Student st2=new Student();
+	
+	st1.setName("nitin lawania");
+	st2.setName("shahzaib");
+
+	st1.getDetails();
+	st2.getDetails();
+
+	System.out.println("now modifying the values of both instance & static variable");
+	st1.name="shweta";
+	st1.collegeName="abc institute";
+
+	st1.getDetails();
+	st2.getDetails();
+
+}
+}
+
+
+-------------------------------------------------------------------------------------------------
+
+homework:
+----------
+	- practice for above programs
+	- learn about class memory
+
+-------------------------------------------------------------------------------------------------
+************************************** END OF DAY - 4 *******************************************
+-------------------------------------------------------------------------------------------------
+
+
+
+
+
